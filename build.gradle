@@ -1,0 +1,11 @@
+apply plugin: "java"
+
+allprojects {
+  group = project.group
+  version = project.mod_version
+  archivesBaseName = project.archives_base_name
+}
+
+task buildAll {
+  dependsOn ":platform-1.18:build"
+}
