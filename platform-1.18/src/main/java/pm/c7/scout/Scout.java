@@ -15,10 +15,10 @@ public class Scout implements ModInitializer {
 
     public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier("scout", "itemgroup"), () -> new ItemStack(Scout.SATCHEL));
 
-    public static final BaseBagItem SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP), 9);
-    public static final BaseBagItem UPGRADED_SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).rarity(Rarity.RARE), 18);
-    public static final BaseBagItem POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP), 3);
-    public static final BaseBagItem UPGRADED_POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).rarity(Rarity.RARE), 6);
+    public static final BaseBagItem SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1), 9);
+    public static final BaseBagItem UPGRADED_SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1).rarity(Rarity.RARE), 18);
+    public static final BaseBagItem POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1), 3);
+    public static final BaseBagItem UPGRADED_POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1).rarity(Rarity.RARE), 6);
 
     @Override
     public void onInitialize() {
