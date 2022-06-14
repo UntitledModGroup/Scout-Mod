@@ -4,5 +4,6 @@
   "item.scout.upgraded_satchel": "Upgraded Satchel",
   "item.scout.pouch": "Pouch",
   "item.scout.upgraded_pouch": "Upgraded Pouch",
-  "trinkets.slot.legs.pouch": "Pouch"
+  "trinkets.slot.legs.pouch": "Pouch",
+  "tooltip.scout.slots": "Holds %d items"
 }

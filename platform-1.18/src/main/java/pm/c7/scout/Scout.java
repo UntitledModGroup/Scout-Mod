@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import pm.c7.scout.item.BaseBagItem;
 
@@ -14,10 +15,10 @@ public class Scout implements ModInitializer {
 
     public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier("scout", "itemgroup"), () -> new ItemStack(Scout.SATCHEL));
 
-    public static final BaseBagItem SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP));
-    public static final BaseBagItem UPGRADED_SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP));
-    public static final BaseBagItem POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP));
-    public static final BaseBagItem UPGRADED_POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP));
+    public static final BaseBagItem SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP), 9);
+    public static final BaseBagItem UPGRADED_SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).rarity(Rarity.RARE), 18);
+    public static final BaseBagItem POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP), 3);
+    public static final BaseBagItem UPGRADED_POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).rarity(Rarity.RARE), 6);
 
     @Override
     public void onInitialize() {
