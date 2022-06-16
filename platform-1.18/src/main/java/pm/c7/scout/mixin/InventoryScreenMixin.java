@@ -3,7 +3,6 @@ package pm.c7.scout.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -23,23 +22,23 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
         super(null, null, null);
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/InventoryScreen;drawTexture(Lnet/minecraft/client/util/math/MatrixStack;IIIIII)V"), method = "drawBackground")
-    private void scout$drawSatchelRow(InventoryScreen that, MatrixStack matrices, int _x, int _y, int _u, int _v, int w, int h) {
+    @Inject(method = "drawBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/InventoryScreen;drawTexture(Lnet/minecraft/client/util/math/MatrixStack;IIIIII)V"))
+    private void scout$drawSatchelRow(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
         if (this.client != null && this.client.player != null) {
             ItemStack backStack = ScoutUtil.getTrinketSlot(this.client.player, "chest/back", 0);
             if (!backStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) backStack.getItem();
                 int slots = bagItem.getSlotCount();
 
+                RenderSystem.setShaderColor(149.0f / 255.0f, 94.0f / 255.0f, 59.0f / 255.0f, 1.0f);
+
                 int x = this.x;
-                int y = this.y;
-                this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, 83);
-                y += 83;
+                int y = this.y + this.backgroundHeight - 2;
+                this.drawTexture(matrices, x, y, 0, 79, this.backgroundWidth, 3);
+                y += 3;
 
                 int u = 0;
                 int v = 83;
-
-                RenderSystem.setShaderColor(0.0f, 1.0f, 0.0f, 1.0f);
 
                 for (int slot = 0; slot < slots; slot++) {
                     if (slot % 9 == 0) {
@@ -61,29 +60,17 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                     }
                 }
 
-                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-
                 x = this.x;
-                this.drawTexture(matrices, x, y, 0, v, this.backgroundWidth, this.backgroundHeight - 83);
-            } else {
-                this.drawTexture(matrices, _x, _y, _u, _v, w, h);
+                this.drawTexture(matrices, x, y, 0, 159, this.backgroundWidth, 7);
+
+                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
             }
-        } else {
-            this.drawTexture(matrices, _x, _y, _u, _v, w, h);
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "drawBackground")
+    @Inject(method = "drawBackground", at = @At("RETURN"))
     private void scout$drawPouchSlots(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
         if (this.client != null && this.client.player != null) {
-            int pouchRows = 0;
-            ItemStack backStack = ScoutUtil.getTrinketSlot(this.client.player, "chest/back", 0);
-            if (!backStack.isEmpty()) {
-                BaseBagItem bagItem = (BaseBagItem) backStack.getItem();
-                int slots = bagItem.getSlotCount();
-                pouchRows = (int) Math.ceil(slots / 9);
-            }
-
             ItemStack leftPouchStack = ScoutUtil.getTrinketSlot(this.client.player, "legs/pouch", 0);
             if (!leftPouchStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) leftPouchStack.getItem();
@@ -95,11 +82,8 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
 
                 y += 137;
 
-                if (pouchRows > 0)
-                    y += pouchRows * 18;
-
                 RenderSystem.setShaderTexture(0, ScoutUtil.SLOT_TEXTURE);
-                RenderSystem.setShaderColor(0.0f, 0.0f, 1.0f, 1.0f);
+                RenderSystem.setShaderColor(215.0f / 255.0f, 107.0f / 255.0f, 67.0f / 255.0f, 1.0f);
 
                 this.drawTexture(matrices, x, y, 18, 25, 7, 7);
                 for (int i = 0; i < columns; i++) {
@@ -164,11 +148,8 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 x += this.backgroundWidth - 7;
                 y += 137;
 
-                if (pouchRows > 0)
-                    y += pouchRows * 18;
-
                 RenderSystem.setShaderTexture(0, ScoutUtil.SLOT_TEXTURE);
-                RenderSystem.setShaderColor(0.0f, 0.0f, 1.0f, 1.0f);
+                RenderSystem.setShaderColor(215.0f / 255.0f, 107.0f / 255.0f, 67.0f / 255.0f, 1.0f);
 
                 this.drawTexture(matrices, x, y, 25, 25, 7, 7);
                 x += 7;
