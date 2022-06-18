@@ -4,6 +4,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -200,6 +201,44 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 this.drawTexture(matrices, x, y, 32, 0, 7, 7);
 
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+            }
+        }
+    }
+
+    @Inject(method = "isClickOutsideBounds", at = @At("TAIL"), cancellable = true)
+    private void scout$adjustOutsideBounds(double mouseX, double mouseY, int left, int top, int button, CallbackInfoReturnable<Boolean> callbackInfo) {
+        if (this.client != null && this.client.player != null) {
+            ItemStack backStack = ScoutUtil.getTrinketSlot(this.client.player, "chest/back", 0);
+            if (!backStack.isEmpty()) {
+                BaseBagItem bagItem = (BaseBagItem) backStack.getItem();
+                int slots = bagItem.getSlotCount();
+                int rows = (int) Math.ceil(slots / 9);
+
+                if (mouseY < (top + this.backgroundHeight) + 8 + (18 * rows) && mouseY >= (top + this.backgroundHeight) && mouseX >= left && mouseY < (left + this.backgroundWidth)) {
+                    callbackInfo.setReturnValue(false);
+                }
+            }
+
+            ItemStack leftPouchStack = ScoutUtil.getTrinketSlot(this.client.player, "legs/pouch", 0);
+            if (!leftPouchStack.isEmpty()) {
+                BaseBagItem bagItem = (BaseBagItem) leftPouchStack.getItem();
+                int slots = bagItem.getSlotCount();
+                int columns = (int) Math.ceil(slots / 3);
+
+                if (mouseX >= left - (columns * 18) && mouseX < left && mouseY >= (top + this.backgroundHeight) - 90 && mouseY < (top + this.backgroundHeight) - 22) {
+                    callbackInfo.setReturnValue(false);
+                }
+            }
+
+            ItemStack rightPouchStack = ScoutUtil.getTrinketSlot(this.client.player, "legs/pouch", 1);
+            if (!rightPouchStack.isEmpty()) {
+                BaseBagItem bagItem = (BaseBagItem) rightPouchStack.getItem();
+                int slots = bagItem.getSlotCount();
+                int columns = (int) Math.ceil(slots / 3);
+
+                if (mouseX >= (left + this.backgroundWidth) && mouseX < (left + this.backgroundWidth) + (columns * 18) && mouseY >= (top + this.backgroundHeight) - 90 && mouseY < (top + this.backgroundHeight) - 22) {
+                    callbackInfo.setReturnValue(false);
+                }
             }
         }
     }
