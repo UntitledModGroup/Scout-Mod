@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "pm.c7.scout.Scout"
+    ],
+    "client": [ 
+      "pm.c7.scout.ScoutClient"
     ]
   },
   "mixins": [

@@ -9,16 +9,20 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import pm.c7.scout.item.BaseBagItem;
+import pm.c7.scout.item.BaseBagItem.BagType;
 
 public class Scout implements ModInitializer {
     public static final String MOD_ID = "scout";
 
+    public static final int MAX_SATCHEL_SLOTS = 18;
+    public static final int MAX_POUCH_SLOTS = 6;
+
     public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier("scout", "itemgroup"), () -> new ItemStack(Scout.SATCHEL));
 
-    public static final BaseBagItem SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1), 9);
-    public static final BaseBagItem UPGRADED_SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1).rarity(Rarity.RARE), 18);
-    public static final BaseBagItem POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1), 3);
-    public static final BaseBagItem UPGRADED_POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1).rarity(Rarity.RARE), 6);
+    public static final BaseBagItem SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1), MAX_SATCHEL_SLOTS / 2, BagType.SATCHEL);
+    public static final BaseBagItem UPGRADED_SATCHEL = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1).rarity(Rarity.RARE), MAX_SATCHEL_SLOTS, BagType.SATCHEL);
+    public static final BaseBagItem POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1), MAX_POUCH_SLOTS / 2, BagType.POUCH);
+    public static final BaseBagItem UPGRADED_POUCH = new BaseBagItem(new FabricItemSettings().group(Scout.ITEM_GROUP).maxCount(1).rarity(Rarity.RARE), MAX_POUCH_SLOTS, BagType.POUCH);
 
     @Override
     public void onInitialize() {
