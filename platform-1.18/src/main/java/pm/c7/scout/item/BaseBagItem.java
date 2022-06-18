@@ -85,31 +85,6 @@ public class BaseBagItem extends TrinketItem {
         return inventory;
     }
 
-    public void addStackToInventory(ItemStack stack, ItemStack insertStack, int index) {
-        NbtCompound compound = stack.getOrCreateNbt();
-        if (!compound.contains(ITEMS_KEY)) {
-            compound.put(ITEMS_KEY, new NbtList());
-        }
-        NbtList items = compound.getList(ITEMS_KEY, 10);
-
-        if (index >= items.size() || index < 0) throw new IllegalArgumentException();
-
-        NbtCompound itemCompound = insertStack.getOrCreateNbt();
-        items.set(index, itemCompound);
-    }
-
-    public void removeStackFromInventory(ItemStack stack, int index) {
-        NbtCompound compound = stack.getOrCreateNbt();
-        if (!compound.contains(ITEMS_KEY)) {
-            compound.put(ITEMS_KEY, new NbtList());
-        }
-        NbtList items = compound.getList(ITEMS_KEY, 10);
-
-        if (index >= items.size() || index < 0) throw new IllegalArgumentException();
-
-        items.remove(index);
-    }
-
     @Override
     public void onEquip(ItemStack stack, SlotReference slotRef, LivingEntity entity) {
         PlayerEntity player = (PlayerEntity) entity;
