@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
+import pm.c7.scout.item.BaseBagItem;
 
 public class BagSlot extends Slot {
     private final int index;
@@ -25,6 +26,9 @@ public class BagSlot extends Slot {
 
     @Override
     public boolean canInsert(ItemStack stack) {
+        if (stack.getItem() instanceof BaseBagItem)
+            return false;
+
         return enabled && inventory != null;
     }
 
