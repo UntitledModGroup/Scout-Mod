@@ -7,7 +7,8 @@
     "PlayerScreenHandlerMixin"
   ],
   "client": [
-    "InventoryScreenMixin"
+    "InventoryScreenMixin",
+    "HandledScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

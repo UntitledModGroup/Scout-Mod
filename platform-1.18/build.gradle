@@ -16,6 +16,10 @@ repositories {
         name = "Ladysnake Libs"
         url = "https://ladysnake.jfrog.io/artifactory/mods"
     }
+    maven {
+        name = "shedaniel"
+        url = "https://maven.shedaniel.me"
+    }
 }
 
 dependencies {
@@ -27,8 +31,10 @@ dependencies {
 
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
     include "dev.emi:trinkets:${project.trinkets_version}"
-    
+
     modImplementation "dev.emi:emi:${project.emi_version}"
+
+    modImplementation "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
 }
 
 processResources {

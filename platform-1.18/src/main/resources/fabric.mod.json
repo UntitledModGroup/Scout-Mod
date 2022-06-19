@@ -25,6 +25,9 @@
     ],
     "emi": [ 
       "pm.c7.scout.compat.ScoutEmiPlugin"
+    ],
+    "rei": [
+      "pm.c7.scout.compat.ScoutREIClientPlugin"
     ]
   },
   "mixins": [
