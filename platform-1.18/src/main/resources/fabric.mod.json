@@ -22,6 +22,9 @@
     ],
     "client": [ 
       "pm.c7.scout.ScoutClient"
+    ],
+    "emi": [ 
+      "pm.c7.scout.compat.ScoutEmiPlugin"
     ]
   },
   "mixins": [
@@ -34,5 +37,15 @@
     "minecraft": "~${minecraft_version}",
     "java": ">=17",
     "trinkets": ">=${trinkets_version}"
+  },
+  
+  "suggests": {
+    "emi": ">=${emi_version}"
+  },
+  
+  "breaks": {
+    "infinitory": "*",
+    "biginv": "*",
+    "extrainv": "*"
   }
 }

@@ -27,6 +27,8 @@ dependencies {
 
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
     include "dev.emi:trinkets:${project.trinkets_version}"
+    
+    modImplementation "dev.emi:emi:${project.emi_version}"
 }
 
 processResources {
@@ -35,9 +37,17 @@ processResources {
     inputs.property("fabric_version", project.fabric_version.split("\\+")[0])
     inputs.property("minecraft_version", project.minecraft_version)
     inputs.property("trinkets_version", project.trinkets_version)
+    inputs.property("emi_version", project.emi_version.split("\\+")[0])
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version, "loader_version": project.loader_version, "fabric_version": project.fabric_version.split("\\+")[0], "minecraft_version": project.minecraft_version, "trinkets_version": project.trinkets_version
+        expand(
+            "version": project.version,
+            "loader_version": project.loader_version,
+            "fabric_version": project.fabric_version.split("\\+")[0],
+            "minecraft_version": project.minecraft_version,
+            "trinkets_version": project.trinkets_version,
+            "emi_version": project.emi_version.split("\\+")[0]
+        )
     }
 }
 
