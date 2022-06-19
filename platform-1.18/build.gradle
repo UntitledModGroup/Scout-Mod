@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'fabric-loom' version '0.12-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -8,49 +8,53 @@ targetCompatibility = JavaVersion.VERSION_17
 archivesBaseName = "${project.archives_base_name}-${project.minecraft_version}"
 
 repositories {
-	maven {
-		name = "TerraformersMC"
-		url = "https://maven.terraformersmc.com/"
-	}
-	maven {
-		name = "Ladysnake Libs"
-		url = "https://ladysnake.jfrog.io/artifactory/mods"
-	}
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven {
+        name = "Ladysnake Libs"
+        url = "https://ladysnake.jfrog.io/artifactory/mods"
+    }
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation "dev.emi:trinkets:${project.trinkets_version}"
-	include "dev.emi:trinkets:${project.trinkets_version}"
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    include "dev.emi:trinkets:${project.trinkets_version}"
 }
 
 processResources {
-	inputs.property "version", project.version
+    inputs.property("version", project.version)
+    inputs.property("loader_version", project.loader_version)
+    inputs.property("fabric_version", project.fabric_version.split("\\+")[0])
+    inputs.property("minecraft_version", project.minecraft_version)
+    inputs.property("trinkets_version", project.trinkets_version)
 
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version, "loader_version": project.loader_version, "fabric_version": project.fabric_version.split("\\+")[0], "minecraft_version": project.minecraft_version, "trinkets_version": project.trinkets_version
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
+    // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
+    it.options.release = 17
 }
 
 java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
-	withSourcesJar()
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
+    withSourcesJar()
 }
 
 jar {
-	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
-	}
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}"}
+    }
 }
