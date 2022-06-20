@@ -2,9 +2,12 @@ package pm.c7.scout;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
+import pm.c7.scout.gui.BagTooltipComponent;
+import pm.c7.scout.item.BagTooltipData;
 import pm.c7.scout.item.BaseBagItem;
 import pm.c7.scout.item.BaseBagItem.BagType;
 import pm.c7.scout.screen.BagSlot;
@@ -50,6 +53,14 @@ public class ScoutClient implements ClientModInitializer {
                     }
                 }
             });
+        });
+
+        TooltipComponentCallback.EVENT.register(data -> {
+            if (data instanceof BagTooltipData d) {
+                return new BagTooltipComponent(d);
+            }
+
+            return null;
         });
     }
 }

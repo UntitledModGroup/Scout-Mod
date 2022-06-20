@@ -7,7 +7,7 @@ Items are retained on the bag items themselves. The bag items are equipped throu
 
 ## Future Plans
 - [ ] Satchel renders on the wearer
-- [ ] Tooltip preview of items inside bags
+~~- [x] Tooltip preview of items inside bags~~
 
 ## Forge?
 A Forge version is not planned. You are free to port it, but I will not endorse it.

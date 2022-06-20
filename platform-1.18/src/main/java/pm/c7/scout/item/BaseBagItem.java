@@ -1,6 +1,7 @@
 package pm.c7.scout.item;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -9,6 +10,7 @@ import dev.emi.trinkets.api.TrinketItem;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.item.TooltipData;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -84,6 +86,20 @@ public class BaseBagItem extends TrinketItem {
         ScoutUtil.inventoryFromTag(items, inventory);
 
         return inventory;
+    }
+
+    @Override
+    public Optional<TooltipData> getTooltipData(ItemStack stack) {
+        DefaultedList<ItemStack> stacks = DefaultedList.of();
+        Inventory inventory = getInventory(stack);
+
+        for (int i = 0; i < slots; i++) {
+            stacks.add(inventory.getStack(i));
+        }
+
+        if (stacks.stream().allMatch(ItemStack::isEmpty)) return Optional.empty();
+
+        return Optional.of(new BagTooltipData(stacks, slots));
     }
 
     @Override
