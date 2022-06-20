@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'org.quiltmc.loom' version '0.12.+'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -24,22 +24,23 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    mappings loom.layered {
+        addLayer quiltMappings.mappings("org.quiltmc:quilt-mappings:${project.mappings}:v2")
+    }
+    modImplementation "org.quiltmc:quilt-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.qfapi_version}-${project.minecraft_version}"
 
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
     include "dev.emi:trinkets:${project.trinkets_version}"
 
-    modImplementation "dev.emi:emi:${project.emi_version}"
+    modCompileOnly "dev.emi:emi:${project.emi_version}"
 
-    modImplementation "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
 }
 
 processResources {
     inputs.property("version", project.version)
-    inputs.property("loader_version", project.loader_version)
     inputs.property("fabric_version", project.fabric_version.split("\\+")[0])
     inputs.property("minecraft_version", project.minecraft_version)
     inputs.property("trinkets_version", project.trinkets_version)
@@ -48,7 +49,6 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand(
             "version": project.version,
-            "loader_version": project.loader_version,
             "fabric_version": project.fabric_version.split("\\+")[0],
             "minecraft_version": project.minecraft_version,
             "trinkets_version": project.trinkets_version,

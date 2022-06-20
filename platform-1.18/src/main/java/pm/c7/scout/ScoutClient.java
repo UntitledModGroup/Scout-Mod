@@ -9,6 +9,7 @@ import pm.c7.scout.item.BaseBagItem;
 import pm.c7.scout.item.BaseBagItem.BagType;
 import pm.c7.scout.screen.BagSlot;
 
+@SuppressWarnings("deprecation")
 public class ScoutClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {

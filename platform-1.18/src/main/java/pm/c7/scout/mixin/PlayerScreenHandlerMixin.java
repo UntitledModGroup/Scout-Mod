@@ -17,7 +17,7 @@ import pm.c7.scout.Scout;
 import pm.c7.scout.ScoutPlayerScreenHandler;
 import pm.c7.scout.screen.BagSlot;
 
-@Mixin(PlayerScreenHandler.class)
+@Mixin(value = PlayerScreenHandler.class, priority = 950)
 public abstract class PlayerScreenHandlerMixin extends ScreenHandler implements ScoutPlayerScreenHandler {
     protected PlayerScreenHandlerMixin() {
         super(null, 0);

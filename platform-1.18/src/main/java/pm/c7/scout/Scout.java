@@ -11,6 +11,7 @@ import net.minecraft.util.registry.Registry;
 import pm.c7.scout.item.BaseBagItem;
 import pm.c7.scout.item.BaseBagItem.BagType;
 
+@SuppressWarnings("deprecation")
 public class Scout implements ModInitializer {
     public static final String MOD_ID = "scout";
 

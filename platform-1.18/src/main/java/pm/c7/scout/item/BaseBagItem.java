@@ -30,6 +30,7 @@ import pm.c7.scout.ScoutPlayerScreenHandler;
 import pm.c7.scout.ScoutUtil;
 import pm.c7.scout.screen.BagSlot;
 
+@SuppressWarnings("deprecation")
 public class BaseBagItem extends TrinketItem {
     private static final String ITEMS_KEY = "Items";
 
