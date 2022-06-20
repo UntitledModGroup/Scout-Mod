@@ -11,6 +11,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -23,7 +24,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
         super(null, null, null);
     }
 
-    @Inject(method = "drawBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/InventoryScreen;drawTexture(Lnet/minecraft/client/util/math/MatrixStack;IIIIII)V"))
+    @Inject(method = "drawBackground", at = @At("HEAD"))
     private void scout$drawSatchelRow(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
         if (this.client != null && this.client.player != null) {
             ItemStack backStack = ScoutUtil.getTrinketSlot(this.client.player, "chest/back", 0);
@@ -31,15 +32,17 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 BaseBagItem bagItem = (BaseBagItem) backStack.getItem();
                 int slots = bagItem.getSlotCount();
 
+                RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                RenderSystem.setShaderTexture(0, ScoutUtil.SLOT_TEXTURE);
                 RenderSystem.setShaderColor(149.0f / 255.0f, 94.0f / 255.0f, 59.0f / 255.0f, 1.0f);
 
                 int x = this.x;
-                int y = this.y + this.backgroundHeight - 2;
-                this.drawTexture(matrices, x, y, 0, 79, this.backgroundWidth, 3);
-                y += 3;
+                int y = this.y + this.backgroundHeight - 3;
+                this.drawTexture(matrices, x, y, 0, 32, this.backgroundWidth, 4);
+                y += 4;
 
                 int u = 0;
-                int v = 83;
+                int v = 36;
 
                 for (int slot = 0; slot < slots; slot++) {
                     if (slot % 9 == 0) {
@@ -62,9 +65,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 }
 
                 x = this.x;
-                this.drawTexture(matrices, x, y, 0, 159, this.backgroundWidth, 7);
-
-                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+                this.drawTexture(matrices, x, y, 0, 54, this.backgroundWidth, 7);
             }
         }
     }
