@@ -1,4 +1,6 @@
 # Scout
+[Modrinth](https://modrinth.com/mod/scout) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/scout)
+
 A mod focused on "physically" extending the inventory (adding slots) through wearing various types of bags. Heavily inspired by makamys' [Satchels](https://github.com/makamys/Satchels).
 
 ![Preview image of inventory with a pouch, an upgraded pouch, and upgraded satchel equipped](.assets/inventory_preview.png)
