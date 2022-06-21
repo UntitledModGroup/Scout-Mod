@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "minecraft:leather"
+  },
+  "result": "scout:tanned_leather",
+  "experience": 0,
+  "cookingtime": 600
+}

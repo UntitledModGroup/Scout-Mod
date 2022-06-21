@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["SlS", "lbl", "sls"],
+  "key": {
+    "l": {
+      "item": "scout:tanned_leather"
+    },
+    "s": {
+      "item": "minecraft:string"
+    },
+    "b": {
+      "item": "minecraft:stone_button"
+    },
+    "S": {
+      "item": "scout:satchel_strap"
+    }
+  },
+  "result": {
+    "item": "scout:satchel"
+  }
+}
