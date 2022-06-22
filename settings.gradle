@@ -14,3 +14,4 @@ pluginManagement {
 }
 
 include 'platform-1.18'
+include 'platform-1.19'

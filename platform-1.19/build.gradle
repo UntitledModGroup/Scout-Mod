@@ -1,5 +1,6 @@
 plugins {
     id 'org.quiltmc.loom' version '0.12.+'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -34,9 +35,13 @@ dependencies {
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
     include "dev.emi:trinkets:${project.trinkets_version}"
 
-    modCompileOnly "dev.emi:emi:${project.emi_version}"
+    modCompileOnly ("dev.emi:emi:${project.emi_version}") {
+        transitive false
+    }
 
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+    
+    modImplementation project(":platform-1.18")
 }
 
 processResources {
@@ -67,5 +72,12 @@ java {}
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}
+    }
+}
+
+remapJar {
+    from(zipTree("../platform-1.18/build/libs/scout-${project(':platform-1.18').minecraft_version}-${project.version}.jar")) {
+        duplicatesStrategy "exclude"
+        exclude "META-INF/**"
     }
 }
