@@ -5,7 +5,7 @@
       "item": "scout:tanned_leather"
     },
     {
-      "item": "minecraft:string"
+      "tag": "c:string"
     },
     {
       "item": "scout:tanned_leather"

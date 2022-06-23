@@ -1,7 +1,7 @@
 {
   "type": "minecraft:campfire_cooking",
   "ingredient": {
-    "item": "minecraft:leather"
+    "tag": "c:leather"
   },
   "result": "scout:tanned_leather",
   "experience": 0,

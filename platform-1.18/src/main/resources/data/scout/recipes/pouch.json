@@ -3,10 +3,10 @@
   "pattern": ["sls", "lbl", "sls"],
   "key": {
     "l": {
-      "item": "minecraft:leather"
+      "tag": "c:leather"
     },
     "s": {
-      "item": "minecraft:string"
+      "tag": "c:string"
     },
     "b": {
       "item": "minecraft:stone_button"
