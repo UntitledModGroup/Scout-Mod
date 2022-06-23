@@ -6,6 +6,7 @@ allprojects {
   archivesBaseName = project.archives_base_name
 }
 
-task buildAll {
+/*task buildAll {
   dependsOn ":platform-1.18:build"
-}
+  dependsOn ":platform-1.19:build"
+}*/

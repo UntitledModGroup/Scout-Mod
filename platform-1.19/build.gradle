@@ -76,8 +76,10 @@ jar {
 }
 
 remapJar {
-    from(zipTree("../platform-1.18/build/libs/scout-${project(':platform-1.18').minecraft_version}-${project.version}.jar")) {
-        duplicatesStrategy "exclude"
-        exclude "META-INF/**"
+    if (file("../platform-1.18/build/libs/scout-${project(':platform-1.18').minecraft_version}-${project.version}.jar").exists()) {
+        from(zipTree("../platform-1.18/build/libs/scout-${project(':platform-1.18').minecraft_version}-${project.version}.jar")) {
+            duplicatesStrategy "exclude"
+            exclude "META-INF/**"
+        }
     }
 }
