@@ -10,7 +10,8 @@
   ],
   "client": [
     "InventoryScreenMixin",
-    "HandledScreenAccessor"
+    "HandledScreenAccessor",
+    "RecipeBookWidgetMixin"
   ],
   "injectors": {
     "defaultRequire": 1
