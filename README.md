@@ -18,3 +18,13 @@ A Forge version is not planned. You are free to port it, but I will not endorse 
 * makamys - Original inspiration from Satchels
 * Emi - Trinkets
 * Kat - Original pouch texture, taken from an older mod of mine and reworked for Scout
+
+## Building
+Due to using multi-projects in Gradle and the 1.19 version depending on the 1.18 version, you will get errors trying to build normally the first time.
+
+1. Go into `settings.gradle` and comment out `include 'platform-1.19'`
+2. Build the 1.18 version
+3. Uncomment the include
+4. You can now build the 1.19 version
+
+Repeat everytime version is bumped.
