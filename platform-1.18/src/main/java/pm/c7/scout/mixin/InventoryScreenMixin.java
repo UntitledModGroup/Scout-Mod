@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.PlayerScreenHandler;
 import pm.c7.scout.ScoutUtil;
 import pm.c7.scout.item.BaseBagItem;
+import pm.c7.scout.item.BaseBagItem.BagType;
 
 @Mixin(InventoryScreen.class)
 public abstract class InventoryScreenMixin extends AbstractInventoryScreen<PlayerScreenHandler> implements RecipeBookProvider {
@@ -27,7 +28,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Inject(method = "drawBackground", at = @At("HEAD"))
     private void scout$drawSatchelRow(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
         if (this.client != null && this.client.player != null) {
-            ItemStack backStack = ScoutUtil.getTrinketSlot(this.client.player, "chest/back", 0);
+            ItemStack backStack = ScoutUtil.findBagItem(this.client.player, BagType.SATCHEL, false);
             if (!backStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) backStack.getItem();
                 int slots = bagItem.getSlotCount();
@@ -73,7 +74,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Inject(method = "drawBackground", at = @At("RETURN"))
     private void scout$drawPouchSlots(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
         if (this.client != null && this.client.player != null) {
-            ItemStack leftPouchStack = ScoutUtil.getTrinketSlot(this.client.player, "legs/pouch", 0);
+            ItemStack leftPouchStack = ScoutUtil.findBagItem(this.client.player, BagType.POUCH, false);
             if (!leftPouchStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) leftPouchStack.getItem();
                 int slots = bagItem.getSlotCount();
@@ -138,7 +139,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
             }
 
-            ItemStack rightPouchStack = ScoutUtil.getTrinketSlot(this.client.player, "legs/pouch", 1);
+            ItemStack rightPouchStack = ScoutUtil.findBagItem(this.client.player, BagType.POUCH, true);
             if (!rightPouchStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) rightPouchStack.getItem();
                 int slots = bagItem.getSlotCount();
@@ -209,7 +210,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Inject(method = "isClickOutsideBounds", at = @At("TAIL"), cancellable = true)
     private void scout$adjustOutsideBounds(double mouseX, double mouseY, int left, int top, int button, CallbackInfoReturnable<Boolean> callbackInfo) {
         if (this.client != null && this.client.player != null) {
-            ItemStack backStack = ScoutUtil.getTrinketSlot(this.client.player, "chest/back", 0);
+            ItemStack backStack = ScoutUtil.findBagItem(this.client.player, BagType.SATCHEL, false);
             if (!backStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) backStack.getItem();
                 int slots = bagItem.getSlotCount();
@@ -220,7 +221,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 }
             }
 
-            ItemStack leftPouchStack = ScoutUtil.getTrinketSlot(this.client.player, "legs/pouch", 0);
+            ItemStack leftPouchStack = ScoutUtil.findBagItem(this.client.player, BagType.POUCH, false);
             if (!leftPouchStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) leftPouchStack.getItem();
                 int slots = bagItem.getSlotCount();
@@ -231,7 +232,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 }
             }
 
-            ItemStack rightPouchStack = ScoutUtil.getTrinketSlot(this.client.player, "legs/pouch", 1);
+            ItemStack rightPouchStack = ScoutUtil.findBagItem(this.client.player, BagType.POUCH, true);
             if (!rightPouchStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) rightPouchStack.getItem();
                 int slots = bagItem.getSlotCount();

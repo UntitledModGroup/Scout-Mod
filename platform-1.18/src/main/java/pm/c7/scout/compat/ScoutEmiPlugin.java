@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.item.ItemStack;
 import pm.c7.scout.ScoutUtil;
 import pm.c7.scout.item.BaseBagItem;
+import pm.c7.scout.item.BaseBagItem.BagType;
 import pm.c7.scout.mixin.HandledScreenAccessor;
 
 public class ScoutEmiPlugin implements EmiPlugin {
@@ -16,7 +17,7 @@ public class ScoutEmiPlugin implements EmiPlugin {
     public void register(EmiRegistry registry) {
         registry.addExclusionArea(InventoryScreen.class, (screen, consumer) -> {
             MinecraftClient client = MinecraftClient.getInstance();
-            ItemStack leftPouchStack = ScoutUtil.getTrinketSlot(client.player, "legs/pouch", 0);
+            ItemStack leftPouchStack = ScoutUtil.findBagItem(client.player, BagType.POUCH, false);
             if (!leftPouchStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) leftPouchStack.getItem();
                 int slots = bagItem.getSlotCount();
@@ -28,7 +29,7 @@ public class ScoutEmiPlugin implements EmiPlugin {
                 consumer.accept(new Bounds(x, y, columns * 18, 68));
             }
 
-            ItemStack rightPouchStack = ScoutUtil.getTrinketSlot(client.player, "legs/pouch", 1);
+            ItemStack rightPouchStack = ScoutUtil.findBagItem(client.player, BagType.POUCH, true);
             if (!rightPouchStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) rightPouchStack.getItem();
                 int slots = bagItem.getSlotCount();

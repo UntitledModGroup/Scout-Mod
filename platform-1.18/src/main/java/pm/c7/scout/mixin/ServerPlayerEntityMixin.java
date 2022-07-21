@@ -17,6 +17,7 @@ import pm.c7.scout.ScoutNetworking;
 import pm.c7.scout.ScoutPlayerScreenHandler;
 import pm.c7.scout.ScoutUtil;
 import pm.c7.scout.item.BaseBagItem;
+import pm.c7.scout.item.BaseBagItem.BagType;
 import pm.c7.scout.screen.BagSlot;
 
 @SuppressWarnings("deprecation")
@@ -28,7 +29,7 @@ public class ServerPlayerEntityMixin {
         ScoutPlayerScreenHandler handler = (ScoutPlayerScreenHandler) player.playerScreenHandler;
 
         if (!player.world.getGameRules().getBoolean(GameRules.KEEP_INVENTORY)) {
-            ItemStack backStack = ScoutUtil.getTrinketSlot(player, "chest/back", 0);
+            ItemStack backStack = ScoutUtil.findBagItem(player, BagType.SATCHEL, false);
             if (!backStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) backStack.getItem();
                 int slots = bagItem.getSlotCount();
@@ -49,7 +50,7 @@ public class ServerPlayerEntityMixin {
                 ServerPlayNetworking.send(player, ScoutNetworking.ENABLE_SLOTS, packet);
             }
 
-            ItemStack leftPouchStack = ScoutUtil.getTrinketSlot(player, "legs/pouch", 0);
+            ItemStack leftPouchStack = ScoutUtil.findBagItem(player, BagType.POUCH, false);
             if (!leftPouchStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) leftPouchStack.getItem();
                 int slots = bagItem.getSlotCount();
@@ -70,7 +71,7 @@ public class ServerPlayerEntityMixin {
                 ServerPlayNetworking.send(player, ScoutNetworking.ENABLE_SLOTS, packet);
             }
 
-            ItemStack rightPouchStack = ScoutUtil.getTrinketSlot(player, "legs/pouch", 1);
+            ItemStack rightPouchStack = ScoutUtil.findBagItem(player, BagType.POUCH, true);
             if (!rightPouchStack.isEmpty()) {
                 BaseBagItem bagItem = (BaseBagItem) rightPouchStack.getItem();
                 int slots = bagItem.getSlotCount();
