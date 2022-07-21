@@ -6,7 +6,8 @@
   "mixins": [
     "PlayerScreenHandlerMixin",
     "ScreenHandlerMixin",
-    "ServerPlayerEntityMixin"
+    "ServerPlayerEntityMixin",
+    "ItemStackMixin"
   ],
   "client": [
     "InventoryScreenMixin",
