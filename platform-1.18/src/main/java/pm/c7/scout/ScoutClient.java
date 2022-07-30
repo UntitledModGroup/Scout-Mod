@@ -17,39 +17,63 @@ public class ScoutClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(ScoutNetworking.ENABLE_SLOTS, (client, handler, packet, sender) -> {
-            boolean enable = packet.readBoolean();
-            int slotIndex = packet.readInt();
-            ItemStack bagStack = packet.readItemStack();
-
-            BaseBagItem bagItem = (BaseBagItem) bagStack.getItem();
-            BagType type = bagItem.getType();
-            int slots = bagItem.getSlotCount();
-
             client.execute(() -> {
                 ScoutPlayerScreenHandler screenHandler = (ScoutPlayerScreenHandler) client.player.playerScreenHandler;
 
-                Inventory inventory = bagItem.getInventory(bagStack);
+                ItemStack satchelStack = ScoutUtil.findBagItem(client.player, BagType.SATCHEL, false);
+                DefaultedList<BagSlot> satchelSlots = screenHandler.scout$getSatchelSlots();
 
-                DefaultedList<BagSlot> bagSlots = DefaultedList.of();
+                for (int i = 0; i < Scout.MAX_SATCHEL_SLOTS; i++) {
+                    BagSlot slot = satchelSlots.get(i);
+                    slot.setInventory(null);
+                    slot.setEnabled(false);
+                }
+                if (!satchelStack.isEmpty()) {
+                    BaseBagItem satchelItem = (BaseBagItem) satchelStack.getItem();
+                    Inventory satchelInv = satchelItem.getInventory(satchelStack);
 
-                if (type == BagType.SATCHEL) {
-                    bagSlots = screenHandler.scout$getSatchelSlots();
-                } else if (type == BagType.POUCH) {
-                    if (slotIndex == 0) {
-                        bagSlots = screenHandler.scout$getLeftPouchSlots();
-                    } else if (slotIndex == 1) {
-                        bagSlots = screenHandler.scout$getRightPouchSlots();
+                    for (int i = 0; i < satchelItem.getSlotCount(); i++) {
+                        BagSlot slot = satchelSlots.get(i);
+                        slot.setInventory(satchelInv);
+                        slot.setEnabled(true);
                     }
                 }
 
-                for (int i = 0; i < slots; i++) {
-                    BagSlot slot = bagSlots.get(i);
-                    if (enable) {
-                        slot.setInventory(inventory);
+                ItemStack leftPouchStack = ScoutUtil.findBagItem(client.player, BagType.POUCH, false);
+                DefaultedList<BagSlot> leftPouchSlots = screenHandler.scout$getLeftPouchSlots();
+
+                for (int i = 0; i < Scout.MAX_POUCH_SLOTS; i++) {
+                    BagSlot slot = leftPouchSlots.get(i);
+                    slot.setInventory(null);
+                    slot.setEnabled(false);
+                }
+                if (!leftPouchStack.isEmpty()) {
+                    BaseBagItem leftPouchItem = (BaseBagItem) leftPouchStack.getItem();
+                    Inventory leftPouchInv = leftPouchItem.getInventory(leftPouchStack);
+
+                    for (int i = 0; i < leftPouchItem.getSlotCount(); i++) {
+                        BagSlot slot = leftPouchSlots.get(i);
+                        slot.setInventory(leftPouchInv);
                         slot.setEnabled(true);
-                    } else {
-                        slot.setInventory(null);
-                        slot.setEnabled(false);
+                    }
+                }
+
+                ItemStack rightPouchStack = ScoutUtil.findBagItem(client.player, BagType.POUCH, true);
+                DefaultedList<BagSlot> rightPouchSlots = screenHandler.scout$getRightPouchSlots();
+
+                for (int i = 0; i < Scout.MAX_POUCH_SLOTS; i++) {
+                    BagSlot slot = rightPouchSlots.get(i);
+                    slot.setInventory(null);
+                    slot.setEnabled(false);
+                }
+                if (!rightPouchStack.isEmpty()) {
+                    BaseBagItem rightPouchItem = (BaseBagItem) rightPouchStack.getItem();
+                    Inventory rightPouchInv = rightPouchItem.getInventory(rightPouchStack);
+
+                    for (int i = 0; i < rightPouchItem.getSlotCount(); i++) {
+                        BagSlot slot = rightPouchSlots.get(i);
+                        slot.setInventory(rightPouchInv);
+                        slot.setEnabled(true);
                     }
                 }
             });

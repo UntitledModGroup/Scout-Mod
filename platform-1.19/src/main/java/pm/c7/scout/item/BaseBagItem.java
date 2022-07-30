@@ -15,6 +15,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
@@ -105,33 +106,64 @@ public class BaseBagItem extends TrinketItem {
         PlayerEntity player = (PlayerEntity) entity;
         ScoutPlayerScreenHandler handler = (ScoutPlayerScreenHandler) player.playerScreenHandler;
 
-        int slotIndex = slotRef.index();
+        ItemStack satchelStack = ScoutUtil.findBagItem(player, BagType.SATCHEL, false);
+        DefaultedList<BagSlot> satchelSlots = handler.scout$getSatchelSlots();
 
-        Inventory inventory = getInventory(stack);
+        for (int i = 0; i < Scout.MAX_SATCHEL_SLOTS; i++) {
+            BagSlot slot = satchelSlots.get(i);
+            slot.setInventory(null);
+            slot.setEnabled(false);
+        }
+        if (!satchelStack.isEmpty()) {
+            BaseBagItem satchelItem = (BaseBagItem) satchelStack.getItem();
+            Inventory satchelInv = satchelItem.getInventory(satchelStack);
 
-        DefaultedList<BagSlot> bagSlots = DefaultedList.of();
-
-        if (type == BagType.SATCHEL) {
-            bagSlots = handler.scout$getSatchelSlots();
-        } else if (type == BagType.POUCH) {
-            if (slotIndex == 0) {
-                bagSlots = handler.scout$getLeftPouchSlots();
-            } else if (slotIndex == 1) {
-                bagSlots = handler.scout$getRightPouchSlots();
+            for (int i = 0; i < satchelItem.getSlotCount(); i++) {
+                BagSlot slot = satchelSlots.get(i);
+                slot.setInventory(satchelInv);
+                slot.setEnabled(true);
             }
         }
 
-        for (int i = 0; i < slots; i++) {
-            BagSlot slot = bagSlots.get(i);
-            slot.setInventory(inventory);
-            slot.setEnabled(true);
+        ItemStack leftPouchStack = ScoutUtil.findBagItem(player, BagType.POUCH, false);
+        DefaultedList<BagSlot> leftPouchSlots = handler.scout$getLeftPouchSlots();
+
+        for (int i = 0; i < Scout.MAX_POUCH_SLOTS; i++) {
+            BagSlot slot = leftPouchSlots.get(i);
+            slot.setInventory(null);
+            slot.setEnabled(false);
+        }
+        if (!leftPouchStack.isEmpty()) {
+            BaseBagItem leftPouchItem = (BaseBagItem) leftPouchStack.getItem();
+            Inventory leftPouchInv = leftPouchItem.getInventory(leftPouchStack);
+
+            for (int i = 0; i < leftPouchItem.getSlotCount(); i++) {
+                BagSlot slot = leftPouchSlots.get(i);
+                slot.setInventory(leftPouchInv);
+                slot.setEnabled(true);
+            }
+        }
+
+        ItemStack rightPouchStack = ScoutUtil.findBagItem(player, BagType.POUCH, true);
+        DefaultedList<BagSlot> rightPouchSlots = handler.scout$getRightPouchSlots();
+
+        for (int i = 0; i < Scout.MAX_POUCH_SLOTS; i++) {
+            BagSlot slot = rightPouchSlots.get(i);
+            slot.setInventory(null);
+            slot.setEnabled(false);
+        }
+        if (!rightPouchStack.isEmpty()) {
+            BaseBagItem rightPouchItem = (BaseBagItem) rightPouchStack.getItem();
+            Inventory rightPouchInv = rightPouchItem.getInventory(rightPouchStack);
+
+            for (int i = 0; i < rightPouchItem.getSlotCount(); i++) {
+                BagSlot slot = rightPouchSlots.get(i);
+                slot.setInventory(rightPouchInv);
+                slot.setEnabled(true);
+            }
         }
 
         PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
-        packet.writeBoolean(true);
-        packet.writeInt(slotIndex);
-        packet.writeItemStack(stack);
-
         if (entity instanceof ServerPlayerEntity serverPlayer) {
             ServerPlayNetworking.send(serverPlayer, ScoutNetworking.ENABLE_SLOTS, packet);
         }
@@ -142,34 +174,99 @@ public class BaseBagItem extends TrinketItem {
         PlayerEntity player = (PlayerEntity) entity;
         ScoutPlayerScreenHandler handler = (ScoutPlayerScreenHandler) player.playerScreenHandler;
 
-        int slotIndex = slotRef.index();
+        ItemStack satchelStack = ScoutUtil.findBagItem(player, BagType.SATCHEL, false);
+        DefaultedList<BagSlot> satchelSlots = handler.scout$getSatchelSlots();
 
-        DefaultedList<BagSlot> bagSlots = DefaultedList.of();
-
-        if (type == BagType.SATCHEL) {
-            bagSlots = handler.scout$getSatchelSlots();
-        } else if (type == BagType.POUCH) {
-            if (slotIndex == 0) {
-                bagSlots = handler.scout$getLeftPouchSlots();
-            } else if (slotIndex == 1) {
-                bagSlots = handler.scout$getRightPouchSlots();
-            }
-        }
-
-        for (int i = 0; i < slots; i++) {
-            BagSlot slot = bagSlots.get(i);
+        for (int i = 0; i < Scout.MAX_SATCHEL_SLOTS; i++) {
+            BagSlot slot = satchelSlots.get(i);
             slot.setInventory(null);
             slot.setEnabled(false);
         }
+        if (!satchelStack.isEmpty()) {
+            BaseBagItem satchelItem = (BaseBagItem) satchelStack.getItem();
+            Inventory satchelInv = satchelItem.getInventory(satchelStack);
+
+            for (int i = 0; i < satchelItem.getSlotCount(); i++) {
+                BagSlot slot = satchelSlots.get(i);
+                slot.setInventory(satchelInv);
+                slot.setEnabled(true);
+            }
+        }
+
+        ItemStack leftPouchStack = ScoutUtil.findBagItem(player, BagType.POUCH, false);
+        DefaultedList<BagSlot> leftPouchSlots = handler.scout$getLeftPouchSlots();
+
+        for (int i = 0; i < Scout.MAX_POUCH_SLOTS; i++) {
+            BagSlot slot = leftPouchSlots.get(i);
+            slot.setInventory(null);
+            slot.setEnabled(false);
+        }
+        if (!leftPouchStack.isEmpty()) {
+            BaseBagItem leftPouchItem = (BaseBagItem) leftPouchStack.getItem();
+            Inventory leftPouchInv = leftPouchItem.getInventory(leftPouchStack);
+
+            for (int i = 0; i < leftPouchItem.getSlotCount(); i++) {
+                BagSlot slot = leftPouchSlots.get(i);
+                slot.setInventory(leftPouchInv);
+                slot.setEnabled(true);
+            }
+        }
+
+        ItemStack rightPouchStack = ScoutUtil.findBagItem(player, BagType.POUCH, true);
+        DefaultedList<BagSlot> rightPouchSlots = handler.scout$getRightPouchSlots();
+
+        for (int i = 0; i < Scout.MAX_POUCH_SLOTS; i++) {
+            BagSlot slot = rightPouchSlots.get(i);
+            slot.setInventory(null);
+            slot.setEnabled(false);
+        }
+        if (!rightPouchStack.isEmpty()) {
+            BaseBagItem rightPouchItem = (BaseBagItem) rightPouchStack.getItem();
+            Inventory rightPouchInv = rightPouchItem.getInventory(rightPouchStack);
+
+            for (int i = 0; i < rightPouchItem.getSlotCount(); i++) {
+                BagSlot slot = rightPouchSlots.get(i);
+                slot.setInventory(rightPouchInv);
+                slot.setEnabled(true);
+            }
+        }
 
         PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
-        packet.writeBoolean(false);
-        packet.writeInt(slotIndex);
-        packet.writeItemStack(stack);
-
         if (entity instanceof ServerPlayerEntity serverPlayer) {
             ServerPlayNetworking.send(serverPlayer, ScoutNetworking.ENABLE_SLOTS, packet);
         }
+    }
+
+    @Override
+    public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+        Item item = stack.getItem();
+
+        ItemStack slotStack = slot.inventory().getStack(slot.index());
+        Item slotItem = slotStack.getItem();
+
+        if (slotItem instanceof BaseBagItem) {
+            if (((BaseBagItem) item).getType() == BagType.SATCHEL) {
+                if (((BaseBagItem) slotItem).getType() == BagType.SATCHEL) {
+                    return true;
+                } else {
+                    return ScoutUtil.findBagItem((PlayerEntity) entity, BagType.SATCHEL, false).isEmpty();
+                }
+            } else if (((BaseBagItem) item).getType() == BagType.POUCH) {
+                if (((BaseBagItem) slotItem).getType() == BagType.POUCH) {
+                    return true;
+                } else {
+                    return ScoutUtil.findBagItem((PlayerEntity) entity, BagType.POUCH, true).isEmpty();
+                }
+            }
+        } else {
+            if (((BaseBagItem) item).getType() == BagType.SATCHEL) {
+                return ScoutUtil.findBagItem((PlayerEntity) entity, BagType.SATCHEL, false).isEmpty();
+            } else if (((BaseBagItem) item).getType() == BagType.POUCH) {
+                return ScoutUtil.findBagItem((PlayerEntity) entity, BagType.POUCH, true).isEmpty();
+            }
+        }
+
+        return false;
     }
 
     public enum BagType {
