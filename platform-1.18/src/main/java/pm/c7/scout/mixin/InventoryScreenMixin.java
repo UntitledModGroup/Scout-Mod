@@ -35,7 +35,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
 
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
                 RenderSystem.setShaderTexture(0, ScoutUtil.SLOT_TEXTURE);
-                RenderSystem.setShaderColor(149.0f / 255.0f, 94.0f / 255.0f, 59.0f / 255.0f, 1.0f);
+                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
                 int x = this.x;
                 int y = this.y + this.backgroundHeight - 3;
@@ -86,7 +86,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 y += 137;
 
                 RenderSystem.setShaderTexture(0, ScoutUtil.SLOT_TEXTURE);
-                RenderSystem.setShaderColor(215.0f / 255.0f, 107.0f / 255.0f, 67.0f / 255.0f, 1.0f);
+                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
                 this.drawTexture(matrices, x, y, 18, 25, 7, 7);
                 for (int i = 0; i < columns; i++) {
@@ -152,7 +152,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 y += 137;
 
                 RenderSystem.setShaderTexture(0, ScoutUtil.SLOT_TEXTURE);
-                RenderSystem.setShaderColor(215.0f / 255.0f, 107.0f / 255.0f, 67.0f / 255.0f, 1.0f);
+                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
                 this.drawTexture(matrices, x, y, 25, 25, 7, 7);
                 x += 7;
