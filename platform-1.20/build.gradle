@@ -1,0 +1,85 @@
+plugins {
+    id 'org.quiltmc.loom' version '0.12.+'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = "${project.archives_base_name}-${project.minecraft_version}"
+
+repositories {
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven {
+        name = "Ladysnake Libs"
+        url = 'https://maven.ladysnake.org/releases'
+    }
+    maven {
+        name = "shedaniel"
+        url = "https://maven.shedaniel.me"
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.layered {
+        addLayer quiltMappings.mappings("org.quiltmc:quilt-mappings:${project.mappings}:v2")
+    }
+    modImplementation "org.quiltmc:quilt-loader:${project.loader_version}"
+
+    modImplementation "org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.qfapi_version}-${project.minecraft_version}"
+
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    include "dev.emi:trinkets:${project.trinkets_version}"
+
+    modCompileOnly ("dev.emi:emi:${project.emi_version}") {
+        transitive false
+    }
+
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+    
+    modImplementation project(":platform-1.18")
+}
+
+processResources {
+    inputs.property("version", project.version)
+    inputs.property("fabric_version", project.fabric_version.split("\\+")[0])
+    inputs.property("minecraft_version", project.minecraft_version)
+    inputs.property("trinkets_version", project.trinkets_version)
+    inputs.property("emi_version", project.emi_version.split("\\+")[0])
+
+    filesMatching("fabric.mod.json") {
+        expand(
+            "version": project.version,
+            "fabric_version": project.fabric_version.split("\\+")[0],
+            "minecraft_version": project.minecraft_version,
+            "trinkets_version": project.trinkets_version,
+            "emi_version": project.emi_version.split("\\+")[0]
+        )
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
+    it.options.release = 17
+}
+
+java {}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}"}
+    }
+}
+
+remapJar {
+    if (file("../platform-1.18/build/libs/scout-${project(':platform-1.18').minecraft_version}-${project.version}.jar").exists()) {
+        from(zipTree("../platform-1.18/build/libs/scout-${project(':platform-1.18').minecraft_version}-${project.version}.jar")) {
+            duplicatesStrategy "exclude"
+            exclude "META-INF/**"
+        }
+    }
+}
