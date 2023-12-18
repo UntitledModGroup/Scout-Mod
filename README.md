@@ -1,5 +1,5 @@
 # Scout
-[Modrinth](https://modrinth.com/mod/scout) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/scout)
+[Modrinth](https://modrinth.com/mod/scoutreloaded)
 
 A mod focused on "physically" extending the inventory (adding slots) through wearing various types of bags. Heavily inspired by makamys' [Satchels](https://github.com/makamys/Satchels).
 
@@ -9,10 +9,9 @@ Items are retained on the bag items themselves. The bag items are equipped throu
 
 ## Future Plans
 - [ ] Satchel renders on the wearer
-- [x] ~~Tooltip preview of items inside bags~~
-
-## Forge?
-A Forge version is not planned. You are free to port it, but I will not endorse it.
+- [ ] Updating to 1.20+
+- [ ] Fixing Repository gradle repos
+- [ ] Switch to Architectury
 
 ## Credits
 * makamys - Original inspiration from Satchels
