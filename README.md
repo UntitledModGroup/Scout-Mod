@@ -1,4 +1,4 @@
-# Scout
+# Scout Releaded
 [Modrinth](https://modrinth.com/mod/scoutreloaded)
 
 A mod focused on "physically" extending the inventory (adding slots) through wearing various types of bags. Heavily inspired by makamys' [Satchels](https://github.com/makamys/Satchels).
