@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "id": "scout",
+  "id": "scoutreloaded",
   "version": "${version}",
 
-  "name": "Scout",
+  "name": "ScoutReloaded",
   "description": "A mod focused on \"physically\" extending the inventory (adding slots) through wearing various types of bags.",
   "authors": [
-    "Cynosphere"
+    "Cynosphere",
+    "UTMG"
   ],
   "contact": {
     "sources": "https://github.com/Cynosphere-mc/Scout"
