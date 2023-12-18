@@ -63,17 +63,10 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
     it.options.release = 17
 }
 
 java {}
-
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
-    }
-}
 
 remapJar {
     if (file("../platform-1.18/build/libs/scout-${project(':platform-1.18').minecraft_version}-${project.version}.jar").exists()) {
