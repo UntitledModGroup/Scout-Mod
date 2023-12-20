@@ -8,9 +8,10 @@ A mod focused on "physically" extending the inventory (adding slots) through wea
 Items are retained on the bag items themselves. The bag items are equipped through [Trinkets](https://github.com/emilyploszaj/trinkets) slots. A new slot type for pouches is added, with two slots.
 
 ## Future Plans
+- [x] Fixing Repository gradle repos
+- [ ] Getting a build from this repo
 - [ ] Satchel renders on the wearer (In progress)
 - [ ] Updating to 1.20+
-- [x] Fixing Repository gradle repos
 - [ ] Switch to Architectury
 
 ## Credits
