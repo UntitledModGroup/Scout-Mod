@@ -10,9 +10,9 @@ Items are retained on the bag items themselves. The bag items are equipped throu
 ## Future Plans
 - [x] Fixing Repository gradle repos
 - [ ] Getting a build from this repo
-- [ ] Satchel renders on the wearer (In progress)
-- [ ] Updating to 1.20+
-- [ ] Switch to Architectury
+- [ ] Splitting up versions based on branches
+- [ ] Satchel renders on the wearer
+- [ ] Updating to 1.20.1
 
 ## Credits
 * makamys - Original inspiration from Satchels
@@ -29,3 +29,8 @@ Due to using multi-projects in Gradle and the 1.19 version depending on the 1.18
 4. You can now build the 1.19 version
 
 Repeat everytime version is bumped.
+
+## Intentions
+My intentions are to keep this mod alive, I wish to update and add features later on.
+## Gradle Split
+I am hoping with this split it will remove the need for hacky and janky workaround for building it.
