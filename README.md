@@ -34,3 +34,5 @@ Repeat everytime version is bumped.
 My intentions are to keep this mod alive, I wish to update and add features later on.
 ## Gradle Split
 I am hoping with this split it will remove the need for hacky and janky workaround for building it.
+## No Forge plans still?
+No. after rethinking and seeing, it would be better overall to make it from scratch for Forge due to the difference in "Trinket" mods. Forge uses Curios, where Fabric uses Trinkets.
