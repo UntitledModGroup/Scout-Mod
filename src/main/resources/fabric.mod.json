@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "scoutreloaded",
+  "version": "${version}",
+
+  "name": "ScoutReloaded",
+  "description": "A mod focused on \"physically\" extending the inventory (adding slots) through wearing various types of bags.",
+  "authors": [
+    "Cynosphere",
+    "UTMG"
+  ],
+  "contact": {
+    "sources": "https://github.com/UntitledModGroup/Scout-Mod"
+  },
+
+  "license": "MIT",
+  "icon": "assets/scout/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "pm.c7.scout.Scout"
+    ],
+    "client": [ 
+      "pm.c7.scout.ScoutClient"
+    ],
+    "emi": [ 
+      "pm.c7.scout.compat.ScoutEmiPlugin"
+    ],
+    "rei": [
+      "pm.c7.scout.compat.ScoutREIClientPlugin"
+    ]
+  },
+  "mixins": [
+    "scout.mixins.json"
+  ],
+
+  "depends": {
+    "fabric": ">=${fabric_version}",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=17",
+    "trinkets": ">=${trinkets_version}"
+  },
+  
+  "suggests": {
+    "emi": ">=${emi_version}"
+  },
+  
+  "breaks": {
+    "infinitory": "*",
+    "biginv": "*",
+    "extrainv": "*"
+  }
+}

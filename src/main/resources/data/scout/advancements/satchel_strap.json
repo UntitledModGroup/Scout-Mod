@@ -1,0 +1,43 @@
+{
+    "parent": "minecraft:recipes/root",
+    "rewards": {
+        "recipes": [
+            "scout:satchel_strap"
+        ]
+    },
+    "criteria": {
+        "has_tanned_leather": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [ "scout:tanned_leather" ]
+                    }
+                ]
+            }
+        },
+        "has_string": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "tag": "c:string"
+                    }
+                ]
+            }
+        },
+        "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+                "recipe": "scout:satchel_strap"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "has_tanned_leather",
+            "has_string",
+            "has_the_recipe"
+        ]
+    ]
+}
