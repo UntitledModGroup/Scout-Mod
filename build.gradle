@@ -1,12 +1,70 @@
-apply plugin: "java"
-
-allprojects {
-  group = project.group
-  version = project.mod_version
-  archivesBaseName = project.archives_base_name
+plugins {
+  id 'fabric-loom' version '1.4-SNAPSHOT'
+  id 'maven-publish'
 }
 
-/*task buildAll {
-  dependsOn ":platform-1.18:build"
-  dependsOn ":platform-1.19:build"
-}*/
+version = project.mod_version
+group = project.maven_group
+
+base {
+  archivesName = project.archives_base_name
+}
+
+repositories {
+  maven {
+    name = "TerraformersMC"
+    url = "https://maven.terraformersmc.com/"
+  }
+  maven {
+    name = "Ladysnake Libs"
+    url = 'https://maven.ladysnake.org/releases'
+  }
+  maven {
+    name = "TerraformersMC"
+    url = "https://maven.terraformersmc.com/"
+  }
+  maven { url "https://maven.shedaniel.me" }
+}
+
+dependencies {
+  // To change the versions see the gradle.properties file
+  minecraft "com.mojang:minecraft:${project.minecraft_version}"
+  mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+  modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+  // Fabric API. This is technically optional, but you probably want it anyway.
+  modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+  modImplementation "dev.emi:trinkets:${trinkets_version}"
+  modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
+  modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
+  modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:9.1.668"
+  //modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:9.1.668"
+  modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:9.1.668"
+  modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.0.2"
+}
+
+processResources {
+  inputs.property "version", project.version
+
+  filesMatching("fabric.mod.json") {
+    expand "version": project.version
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  it.options.release = 17
+}
+
+java {
+  withSourcesJar()
+
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+  from("LICENSE") {
+    rename { "${it}_${project.base.archivesName.get()}"}
+  }
+}
