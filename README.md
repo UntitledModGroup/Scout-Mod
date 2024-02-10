@@ -18,6 +18,7 @@ Items are retained on the bag items themselves. The bag items are equipped throu
 * makamys - Original inspiration from Satchels
 * Emi - Trinkets
 * Kat - Original pouch texture, taken from an older mod of mine and reworked for Scout
+* CadIndie - Inital Gradle Updates
 * UTMG - Upgrading original source, (Reloaded Edition)
 
 ## Building
