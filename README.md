@@ -21,16 +21,6 @@ Items are retained on the bag items themselves. The bag items are equipped throu
 * CadIndie - Inital Gradle Updates
 * UTMG - Upgrading original source, (Reloaded Edition)
 
-## Building
-Due to using multi-projects in Gradle and the 1.19 version depending on the 1.18 version, you will get errors trying to build normally the first time.
-
-1. Go into `settings.gradle` and comment out `include 'platform-1.19'`
-2. Build the 1.18 version
-3. Uncomment the include
-4. You can now build the 1.19 version
-
-Repeat everytime version is bumped.
-
 ## Intentions
 My intentions are to keep this mod alive, I wish to update and add features later on.
 ## Gradle Split
