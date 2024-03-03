@@ -22,7 +22,7 @@ Items are retained on the bag items themselves. The bag items are equipped throu
 * UTMG - Upgrading original source, (Reloaded Edition)
 
 ## How to build?
-Easy. Just build like every other gradle project ever.
+Easy. Just build like every other gradle project.
 
 ## Intentions
 My intentions are to keep this mod alive, I wish to update and add features later on.
