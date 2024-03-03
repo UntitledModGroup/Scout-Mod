@@ -21,9 +21,11 @@ Items are retained on the bag items themselves. The bag items are equipped throu
 * CadIndie - Inital Gradle Updates
 * UTMG - Upgrading original source, (Reloaded Edition)
 
+## How to build?
+Easy. Just build like every other gradle project ever.
+
 ## Intentions
 My intentions are to keep this mod alive, I wish to update and add features later on.
-## Gradle Split
-I am hoping with this split it will remove the need for hacky and janky workaround for building it.
+
 ## No Forge plans still?
 No. after rethinking and seeing, it would be better overall to make it from scratch for Forge due to the difference in "Trinket" mods. Forge uses Curios, where Fabric uses Trinkets.
