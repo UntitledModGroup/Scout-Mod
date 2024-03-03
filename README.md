@@ -29,3 +29,6 @@ My intentions are to keep this mod alive, I wish to update and add features late
 
 ## No Forge plans still?
 No. after rethinking and seeing, it would be better overall to make it from scratch for Forge due to the difference in "Trinket" mods. Forge uses Curios, where Fabric uses Trinkets.
+
+
+[![Bisect](https://cdn.modrinth.com/data/cached_images/9af1275fd26bf8a29cc2631f8cb0afbc66ee3547.png 'BH')](https://bisecthosting.com/cartriggerm)
