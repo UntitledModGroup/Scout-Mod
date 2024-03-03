@@ -36,14 +36,10 @@
   ],
 
   "depends": {
-    "fabric": ">=${fabric_version}",
-    "minecraft": "~${minecraft_version}",
+    "fabric": ">=0.15.0",
+    "minecraft": ">=1.19.1",
     "java": ">=17",
-    "trinkets": ">=${trinkets_version}"
-  },
-  
-  "suggests": {
-    "emi": ">=${emi_version}"
+    "trinkets": ">=3.4.1"
   },
   
   "breaks": {
