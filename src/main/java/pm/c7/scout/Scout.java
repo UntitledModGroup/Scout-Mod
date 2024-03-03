@@ -8,7 +8,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.registry.Registry;
+//import net.minecraft.util.registry.Registry; no longer available in this form
 import pm.c7.scout.item.BaseBagItem;
 import pm.c7.scout.item.BaseBagItem.BagType;
 
