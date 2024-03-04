@@ -23,8 +23,19 @@ repositories {
     name = "TerraformersMC"
     url = "https://maven.terraformersmc.com/"
   }
-  maven { url "https://maven.shedaniel.me" }
+  maven {
+    url "https://maven.shedaniel.me"
+  }
+  maven {
+    name = 'GeckoLib'
+    url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+    content {
+      includeGroupByRegex("software\\.bernie.*")
+      includeGroup("com.eliotlash.mclib")
+    }
+  }
 }
+
 
 dependencies {
   // To change the versions see the gradle.properties file
@@ -34,7 +45,7 @@ dependencies {
 
   // Fabric API. This is technically optional, but you probably want it anyway.
   modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
+  modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.40'
   modImplementation "dev.emi:trinkets:${trinkets_version}"
   modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
   modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
