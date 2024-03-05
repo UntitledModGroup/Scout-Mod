@@ -6,7 +6,7 @@ import com.google.common.math.IntMath;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.font.TextRenderer;
-//import net.minecraft.client.gui.DrawableHelper; no longer available in 1.20.1
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
