@@ -19,8 +19,6 @@ public class Scout implements ModInitializer {
     public static final int MAX_SATCHEL_SLOTS = 18;
     public static final int MAX_POUCH_SLOTS = 6;
 
-    public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier("scout", "itemgroup"), () -> new ItemStack(Scout.SATCHEL));
-
     public static final Item TANNED_LEATHER = new Item(new FabricItemSettings());
     public static final Item SATCHEL_STRAP = new Item(new FabricItemSettings());
 
