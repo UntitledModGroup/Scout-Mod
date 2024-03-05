@@ -31,7 +31,7 @@ public class BagTooltipComponent implements TooltipComponent {
 
     @Override
     public int getWidth(TextRenderer textRenderer) {
-        return 18 * (slotCount < 6 ? slotCount : 6);
+        return 18 * (Math.min(slotCount, 6));
     }
 
     public void drawItems(TextRenderer textRenderer, int x, int y, MatrixStack matrices, ItemRenderer itemRenderer, int z) {
