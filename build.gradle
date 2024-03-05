@@ -23,7 +23,9 @@ repositories {
     name = "TerraformersMC"
     url = "https://maven.terraformersmc.com/"
   }
-  maven { url "https://maven.shedaniel.me" }
+  maven {
+    url "https://maven.shedaniel.me"
+  }
 }
 
 dependencies {
@@ -34,7 +36,6 @@ dependencies {
 
   // Fabric API. This is technically optional, but you probably want it anyway.
   modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
   modImplementation "dev.emi:trinkets:${trinkets_version}"
   modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
   modLocalRuntime "dev.emi:emi-fabric:${emi_version}"

@@ -12,6 +12,3 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-
-include 'platform-1.18'
-include 'platform-1.19'
