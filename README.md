@@ -11,7 +11,7 @@ Items are retained on the bag items themselves. The bag items are equipped throu
 - [x] Fixing Repository gradle repos
 - [x] Splitting up versions based on branches
 - [x] Getting a build from this repo
-- [ ] Satchel renders on the wearer
+- [ ] Satchel renders on the wearer (IN PROGRESS)
 - [ ] Updating to 1.20.1
 
 ## Credits
